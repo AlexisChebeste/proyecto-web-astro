@@ -1,0 +1,28 @@
+---
+import Image from 'astro/components/Image.astro';
+
+interface Props {
+    id?: number;
+    author: string;
+    area: string;
+    image: string;
+    testimonials: string;
+}
+
+const {author, area, image, testimonials} = Astro.props;
+---
+
+<div class="bg-white p-5">
+    <p class="text-[18px]">
+        {testimonials}
+    </p>
+    <div class="flex justify-start gap-7 mt-7">
+        <div class="image ">
+            <img class="max-w-[70px] rounded-full" src={image} alt="person" />
+        </div>
+        <div class="bio">
+            <h3>{author}</h3>
+            <p>{area}</p>
+        </div>
+    </div>
+    </div>

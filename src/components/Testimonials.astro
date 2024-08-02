@@ -1,0 +1,33 @@
+---
+interface ITestimonialsItem {
+    id?: number;
+    author: string;
+    area: string;
+    image: string;
+    testimonials: string;
+}
+
+import TestimonialItem from "./TestimonialItem.astro";
+
+import { getEntry } from "astro:content";
+
+const {data: testimonialsData} = await getEntry("testimonials", "testimonials");
+const {testimonials} = testimonialsData;
+
+---
+
+<section class="bg-light-gray py-16 px-0">
+    <div class="container">
+        <h2 class="max-w-[670px] mt-0 mx-auto mb-12 text-center">
+        Don't take our word for it. See what customers are saying about us.
+        </h2>
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((item: ITestimonialsItem) =>
+                <TestimonialItem 
+
+                    {...item}
+                />
+            )}
+        </div>
+    </div>
+</section>

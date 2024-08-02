@@ -1,0 +1,64 @@
+---
+interface ITeammate{
+    id?: number;
+    image: string;
+    name: string;
+    area: string;
+    description: string;
+}
+
+import Teammate from "./Teammate.astro";
+import checkLogo from "../images/Icons/check.svg";
+import userIcon from "../images/Icons/user.svg";
+import trophyIcon from "../images/Icons/trophy.svg";
+import Image from "astro/components/Image.astro";
+
+import { getCollection } from "astro:content";
+
+const data = await getCollection('teammate');
+const teammates = data[0].data.teammate;
+
+
+---
+
+<section class="bg-gray pt-12 px-0 pb-24">
+    <div class="container grid grid-cols-1 gap-5 lg:grid-cols-[1fr_2fr_auto]">
+        <div class="info">
+        <h2>We are proud of our design team</h2>
+        <p>
+            Just sit back and relax while we take care of your business needs
+            for you.
+        </p>
+        </div>
+        <div class="flex flex-wrap gap-24">
+        <div class="flex flex-col items-center text-center gap-2.5 md:gap-3 flex-1">
+            <div class="bg-skyblue rounded-full p-4 w-fit">
+            <Image class="h-[26px] rounded-full" src={checkLogo} alt="check" />
+            </div>
+            <h3 class="text-4xl">1000+</h3>
+            <p>Completed Projects</p>
+        </div>
+        <div class="flex flex-col items-center text-center gap-2.5 md:gap-3 flex-1">
+            <div class="bg-skyblue rounded-full p-4 w-fit">
+            <Image class="h-[26px] rounded-full" src={userIcon} alt="user" />
+            </div>
+            <h3 class="text-4xl">50K+</h3>
+            <p>Happy Customers</p>
+        </div>
+        <div class="flex flex-col items-center text-center gap-2.5 md:gap-3 flex-1">
+            <div class="bg-skyblue rounded-full p-4 w-fit">
+            <Image class="h-[26px]"  src={trophyIcon} alt="trophy" />
+            </div>
+            <h3 class="text-4xl">20+</h3>
+            <p>Awards Won</p>
+        </div>
+        </div>
+        <div class="grid gap-5 grid-cols-1 col-span-full md:grid-cols-2 lg:grid-cols-4">
+            {teammates.map((item: ITeammate) => 
+            <Teammate 
+
+                {...item}
+            /> )}
+        </div>
+    </div>
+    </section>
